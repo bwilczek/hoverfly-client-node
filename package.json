@@ -8,6 +8,7 @@
     "build": "tsc",
     "lint": "eslint ./src",
     "format": "prettier ./src --write",
+    "pretest": "./bin/pretest.sh",
     "test": "jest"
   },
   "files": [

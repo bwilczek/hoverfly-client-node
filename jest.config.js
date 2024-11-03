@@ -4,9 +4,13 @@ module.exports = {
   transform: {
     '^.+.tsx?$': ['ts-jest', { useESM: true }],
   },
+  testPathIgnorePatterns: [
+    "/node_modules/",
+    "/tests/utils/",
+  ],
   testTimeout: 30000,
   maxConcurrency: 1,
-  // setupFilesAfterEnv: ["<rootDir>/lib/setupTests.ts"],
+  // setupFilesAfterEnv: ["<rootDir>/tests/utils/setup.ts"],
   reporters: [
     'default',
     ['./node_modules/jest-html-reporter', {

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "NodeNext",
+    "target": "esnext",
+    "module": "nodenext",
     "declaration": true,
     "outDir": "./dist",
     "alwaysStrict": true,
@@ -15,7 +15,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUncheckedIndexedAccess": true,
-    "moduleResolution": "NodeNext"
+    "moduleResolution": "nodenext"
   },
   "include": ["src"],
   "exclude": ["node_modules", "tests/**/*"]

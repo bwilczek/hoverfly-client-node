@@ -17,6 +17,15 @@ export class Client {
     });
   }
 
+  async alive(): Promise<boolean> {
+    try {
+      await this.getMode();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   async getMode(): Promise<ModePayload> {
     const response = await this.http.get("/api/v2/hoverfly/mode");
     return response.data as Promise<ModePayload>;
