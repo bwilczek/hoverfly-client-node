@@ -75,6 +75,11 @@ export class Client {
 
   async purgeSimulation(): Promise<Simulation> {
     const response = await this.http.delete("/api/v2/simulation");
+    if (response.status !== 200) {
+      throw new Error(
+        `Hoverfly could not delete simulation. Response: ${response.data.error}`,
+      );
+    }
     return response.data as Promise<Simulation>;
   }
 
