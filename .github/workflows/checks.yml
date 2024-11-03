@@ -9,6 +9,13 @@ jobs:
     name: Linter, Jest, TSC Build
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    services:
+      hoverfly:
+        image: spectolabs/hoverfly:latest
+        ports:
+        - 8500/tcp
+        - 8888/tcp
+
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
