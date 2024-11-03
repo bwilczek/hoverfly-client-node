@@ -6,7 +6,7 @@ export const HOVERFLY_ADMIN_URL = process.env.HOVERFLY_ADMIN_URL ?? 'http://127.
 export const client = new Client(HOVERFLY_ADMIN_URL)
 
 export const resetState = async () => {
-  await client.purgeMiddleware()
   await client.purgeSimulation()
   await client.setMode({mode: 'simulate'})
+  await client.purgeMiddleware()
 }

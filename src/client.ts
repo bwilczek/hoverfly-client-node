@@ -40,7 +40,7 @@ export class Client {
   }
 
   async purgeMiddleware(): Promise<MiddlewarePayload> {
-    return this.setMiddleware({});
+    return this.setMiddleware({remote: "", binary: "", script: ""});
   }
 
   async setMiddleware(payload: MiddlewarePayload): Promise<MiddlewarePayload> {
