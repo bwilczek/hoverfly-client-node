@@ -14,6 +14,6 @@ type SetModePayloadArguments = {
 };
 
 export type SetModePayload = {
-  mode: string;
+  mode: "capture" | "simulate" | "spy" | "modify" | "synthesize";
   arguments?: SetModePayloadArguments;
 };

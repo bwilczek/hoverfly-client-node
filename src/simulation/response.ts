@@ -14,5 +14,6 @@ export function decodeResponseBody(response: ResponseData): string {
   if (response.encodedBody && response.headers?.["Content-Encoding"]?.includes("br")) {
     return Buffer.from(brotliDecompressSync(Buffer.from(response.body, "base64"))).toString("utf-8");
   }
+  // TODO: decode other formats (gzip?) if needed
   return response.body;
 }
