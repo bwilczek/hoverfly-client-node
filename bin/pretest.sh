@@ -1,8 +1,10 @@
 #!/bin/bash
 
-echo "Checking if Hoverfly is running..."
+PROXY_ADMIN=${HOVERFLY_ADMIN_URL:-http://127.0.0.1:8888}
 
-if !(curl ${HOVERFLY_ADMIN_URL:-http://127.0.0.1:8888} > /dev/null 2>&1); then
+echo "Checking if Hoverfly is running on $PROXY_ADMIN ..."
+
+if !(curl $PROXY_ADMIN > /dev/null 2>&1); then
   echo "Hoverfly is not running. Cannot run tests without it."
   echo "For local environment start it with:"
   echo

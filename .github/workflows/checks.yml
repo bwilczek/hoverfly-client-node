@@ -29,6 +29,8 @@ jobs:
       run: npm run build
     - name: Run jest tests
       run: npm run test
+      env:
+        HOVERFLY_ADMIN_URL: http://localhost:${{ job.services.hoverfly.ports[8888] }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
