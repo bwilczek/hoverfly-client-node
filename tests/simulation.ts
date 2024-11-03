@@ -1,10 +1,69 @@
 import { describe, expect, test } from '@jest/globals'
+import { isEqual } from 'lodash'
 
-import { buildSimulationFromFile, Simulation } from '../src/index'
+import { buildSimulation, buildSimulationFromFile, mergeSimulations, RequestMatcher, ResponseData, subtractSimulations } from '../src/index'
 
 describe('Simulation', () => {
-  test('loads from file', () => {
+  test('buildSimulationFromFile', () => {
     const sim = buildSimulationFromFile('./tests/res/npmjs.json')
-    expect(sim.data.pairs.at(0)?.response.body).toBe('Tampered body.')
+    expect(sim.data.pairs.at(0)?.response.body).toBe('Forged NPMJS')
+  })
+
+  test('mergeSimulations', () => {
+    const response1: ResponseData = { status: 200, body: 'Forged Wikipedia', encodedBody: false, templated: false }
+    const response2: ResponseData = { status: 200, body: 'Forged StackOverflow', encodedBody: false, templated: false }
+    const response2overwrite: ResponseData = { status: 200, body: 'Reforged StackOverflow', encodedBody: false, templated: false }
+    const response3: ResponseData = { status: 200, body: 'Forged NodeJS.org', encodedBody: false, templated: false }
+    const request1: RequestMatcher = {
+      path: [{ matcher: 'exact', value: '/' }],
+      destination: [{ matcher: 'exact', value: 'en.wikipedia.org' }],
+    }
+    const request2: RequestMatcher = {
+      path: [{ matcher: 'exact', value: '/' }],
+      destination: [{ matcher: 'exact', value: 'stackoverflow.com' }],
+    }
+    const request3: RequestMatcher = {
+      path: [{ matcher: 'exact', value: '/' }],
+      destination: [{ matcher: 'exact', value: 'nodejs.org' }],
+    }
+    const pair1 = { request: request1, response: response1 }
+    const pair2 = { request: request2, response: response2 }
+    const pair2overwrite = { request: request2, response: response2overwrite }
+    const pair3 = { request: request3, response: response3 }
+
+    const sim1 = buildSimulation([pair1, pair2])
+    const sim2 = buildSimulation([pair2overwrite, pair3])
+
+    const merged = mergeSimulations(sim1, sim2)
+    expect(merged.data.pairs.length).toBe(3)
+    expect(merged.data.pairs.find(p => isEqual(p.request, request2) && isEqual(p.response, response2overwrite))).toBeDefined()
+  })
+
+  test('subtractSimulations', () => {
+    const response1: ResponseData = { status: 200, body: 'Forged Wikipedia', encodedBody: false, templated: false }
+    const response2: ResponseData = { status: 200, body: 'Forged StackOverflow', encodedBody: false, templated: false }
+    const response3: ResponseData = { status: 200, body: 'Forged NodeJS.org', encodedBody: false, templated: false }
+    const request1: RequestMatcher = {
+      path: [{ matcher: 'exact', value: '/' }],
+      destination: [{ matcher: 'exact', value: 'en.wikipedia.org' }],
+    }
+    const request2: RequestMatcher = {
+      path: [{ matcher: 'exact', value: '/' }],
+      destination: [{ matcher: 'exact', value: 'stackoverflow.com' }],
+    }
+    const request3: RequestMatcher = {
+      path: [{ matcher: 'exact', value: '/' }],
+      destination: [{ matcher: 'exact', value: 'nodejs.org' }],
+    }
+    const pair1 = { request: request1, response: response1 }
+    const pair2 = { request: request2, response: response2 }
+    const pair3 = { request: request3, response: response3 }
+
+    const sim1 = buildSimulation([pair1, pair2])
+    const sim2 = buildSimulation([pair2, pair3])
+
+    const subtracted = subtractSimulations(sim1, sim2)
+    expect(subtracted.data.pairs.length).toBe(1)
+    expect(subtracted.data.pairs.find(p => isEqual(p.request, request1) && isEqual(p.response, response1))).toBeDefined()
   })
 })

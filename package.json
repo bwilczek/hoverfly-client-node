@@ -31,6 +31,7 @@
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.13.0",
     "@types/jest": "^29.5.14",
+    "@types/lodash": "^4.17.13",
     "@typescript-eslint/eslint-plugin": "^8.12.1",
     "@typescript-eslint/parser": "^8.12.1",
     "axios": "^1.7.7",
@@ -38,6 +39,7 @@
     "eslint-config-prettier": "^9.1.0",
     "jest": "^29.7.0",
     "jest-html-reporter": "^3.10.2",
+    "lodash": "^4.17.21",
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.5",
     "typescript": "^5.6.3"
