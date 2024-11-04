@@ -54,6 +54,11 @@ export function buildSimulationFromFile(path: string): Simulation {
   return buildSimulationFromJSONString(fs.readFileSync(path, "utf-8"));
 }
 
+export function saveSimulationToFile(sim: Simulation, path: string): void {
+  const content = JSON.stringify(sim);
+  fs.writeFileSync(path, content);
+}
+
 function subtractPairs(
   left: Array<{ request: RequestMatcher; response: ResponseData }>,
   right: Array<{ request: RequestMatcher; response: ResponseData }>,

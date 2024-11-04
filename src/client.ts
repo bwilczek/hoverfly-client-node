@@ -1,7 +1,7 @@
 import * as axios from "axios";
 import { MiddlewarePayload } from "./middleware";
 import { ModePayload, SetModePayload } from "./mode";
-import { mergeSimulations, Simulation, buildSimulation } from "./simulation";
+import { mergeSimulations, subtractSimulations, Simulation, buildSimulation } from "./simulation";
 import { RequestMatcher } from "./simulation/request";
 import { ResponseData } from "./simulation/response";
 import { Journal, JournalSearchPayload } from "./journal";
@@ -116,6 +116,12 @@ export class Client {
   async appendSimulation(simulation: Simulation): Promise<void> {
     const existingSimulation = await this.getSimulation();
     const newSimulation = mergeSimulations(existingSimulation, simulation);
+    await this.uploadSimulation(newSimulation);
+  }
+
+  async removeSimulation(simulation: Simulation): Promise<void> {
+    const existingSimulation = await this.getSimulation();
+    const newSimulation = subtractSimulations(existingSimulation, simulation);
     await this.uploadSimulation(newSimulation);
   }
 }

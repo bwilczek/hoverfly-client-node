@@ -1,6 +1,6 @@
 {
   "name": "@bwilczek/hoverfly-client",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Client lib for Hoverfly Proxy REST API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
