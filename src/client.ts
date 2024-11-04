@@ -4,6 +4,7 @@ import { ModePayload, SetModePayload } from "./mode";
 import { mergeSimulations, Simulation, buildSimulation } from "./simulation";
 import { RequestMatcher } from "./simulation/request";
 import { ResponseData } from "./simulation/response";
+import { Journal, JournalSearchPayload } from "./journal";
 
 export class Client {
   http: axios.AxiosInstance;
@@ -40,7 +41,7 @@ export class Client {
   }
 
   async purgeMiddleware(): Promise<MiddlewarePayload> {
-    return this.setMiddleware({remote: "", binary: "", script: ""});
+    return this.setMiddleware({ remote: "", binary: "", script: "" });
   }
 
   async setMiddleware(payload: MiddlewarePayload): Promise<MiddlewarePayload> {
@@ -56,6 +57,29 @@ export class Client {
   async getMiddleware(): Promise<MiddlewarePayload> {
     const response = await this.http.get("/api/v2/hoverfly/middleware");
     return response.data as Promise<MiddlewarePayload>;
+  }
+
+  async purgeJournal(): Promise<Journal> {
+    const response = await this.http.delete("/api/v2/journal");
+    if (response.status !== 200) {
+      throw new Error(`Hoverfly could not delete journal. Response: ${response.data.error}`);
+    }
+    return response.data as Promise<Journal>;
+  }
+
+  async getJournal(): Promise<Journal> {
+    const response = await this.http.get("/api/v2/journal");
+    return response.data as Promise<Journal>;
+  }
+
+  async searchJournal(payload: JournalSearchPayload): Promise<Journal> {
+    const response = await this.http.post("/api/v2/journal", payload);
+    if (response.status !== 200) {
+      throw new Error(
+        `Hoverfly could not serach journal. Payload: ${JSON.stringify(payload)} Response: ${response.data.error}`,
+      );
+    }
+    return response.data as Promise<Journal>;
   }
 
   async getSimulation(): Promise<Simulation> {
@@ -76,9 +100,7 @@ export class Client {
   async purgeSimulation(): Promise<Simulation> {
     const response = await this.http.delete("/api/v2/simulation");
     if (response.status !== 200) {
-      throw new Error(
-        `Hoverfly could not delete simulation. Response: ${response.data.error}`,
-      );
+      throw new Error(`Hoverfly could not delete simulation. Response: ${response.data.error}`);
     }
     return response.data as Promise<Simulation>;
   }

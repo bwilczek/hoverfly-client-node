@@ -9,4 +9,5 @@ export const resetState = async () => {
   await client.purgeSimulation()
   await client.setMode({mode: 'simulate'})
   await client.purgeMiddleware()
+  await client.purgeJournal()
 }

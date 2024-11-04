@@ -37,5 +37,14 @@ describe('Client', () => {
     })
     const nodeResponse = await http.get('/')
     expect(nodeResponse.data).toContain('Forged NPMJS')
+
+    const journal = await client.getJournal()
+    expect(journal.journal.length).toBe(1)
+
+    const filteredJournal = await client.searchJournal({request: {destination: [{matcher: "exact", value: "www.npmjs.com"}]}})
+    expect(filteredJournal.journal.length).toBe(1)
+
+    const emptyJournal = await client.searchJournal({request: {destination: [{matcher: "exact", value: "www.nosuchhost.com"}]}})
+    expect(emptyJournal.journal.length).toBe(0)
   })
 });
