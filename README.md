@@ -165,7 +165,7 @@ const client = new Client("http://127.0.0.1:8888")
 await client.uploadSimulation(buildSimulationFromFile('always_active_stubs.json'))
 
 // add request/response pair that will simulate specific condition
-await client.uploadSimulation(buildSimulationFromFile('google_auth_failure.json'))
+await client.appendSimulation(buildSimulationFromFile('google_auth_failure.json'))
 
 // remove that pair
 await client.removeSimulation(buildSimulationFromFile('google_auth_failure.json'))
