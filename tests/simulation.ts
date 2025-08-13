@@ -1,12 +1,32 @@
 import { describe, expect, test } from '@jest/globals'
 import { isEqual } from 'lodash'
 
-import { buildSimulation, buildSimulationFromFile, mergeSimulations, RequestMatcher, ResponseData, subtractSimulations } from '../src/index'
+import { buildSimulation, buildSimulationFromFile, decodeResponseBody, mergeSimulations, RequestMatcher, ResponseData, subtractSimulations } from '../src/index'
 
 describe('Simulation', () => {
   test('buildSimulationFromFile', () => {
     const sim = buildSimulationFromFile('./tests/res/npmjs.json')
-    expect(sim.data.pairs.at(0)?.response.body).toBe('Forged NPMJS')
+    const response = sim.data.pairs.at(0)!.response;
+    expect(response.body).toBe('Forged NPMJS')
+    expect(decodeResponseBody(response)).toBe('Forged NPMJS')
+  })
+
+  test('decodeResponseBody(base64)', () => {
+    const sim = buildSimulationFromFile('./tests/res/base64_body.json')
+    const response = sim.data.pairs.at(0)!.response;
+    expect(decodeResponseBody(response)).toBe('Hello from base64')
+  })
+
+  test('decodeResponseBody(base64+gzip)', () => {
+    const sim = buildSimulationFromFile('./tests/res/gzip_base64_body.json')
+    const response = sim.data.pairs.at(0)!.response;
+    expect(decodeResponseBody(response)).toBe('Hello from base64+gzip')
+  })
+
+  test('decodeResponseBody(base64+brotli)', () => {
+    const sim = buildSimulationFromFile('./tests/res/brotli_base64_body.json')
+    const response = sim.data.pairs.at(0)!.response;
+    expect(decodeResponseBody(response)).toBe('Hello from base64+brotli')
   })
 
   test('mergeSimulations', () => {

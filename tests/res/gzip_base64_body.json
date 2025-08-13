@@ -1,0 +1,120 @@
+{
+  "data": {
+    "pairs": [
+      {
+        "request": {
+          "path": [
+            {
+              "matcher": "exact",
+              "value": "/"
+            }
+          ],
+          "method": [
+            {
+              "matcher": "exact",
+              "value": "GET"
+            }
+          ],
+          "destination": [
+            {
+              "matcher": "exact",
+              "value": "www.npmjs.com"
+            }
+          ],
+          "scheme": [
+            {
+              "matcher": "exact",
+              "value": "https"
+            }
+          ],
+          "body": [
+            {
+              "matcher": "exact",
+              "value": ""
+            }
+          ]
+        },
+        "response": {
+          "status": 200,
+          "body": "H4sIANZ8nGgC//NIzcnJV0grys9VSEosTjUz0U6vyiwAAE3Ov6wWAAAA",
+          "encodedBody": true,
+          "headers": {
+            "Age": [
+              "2102"
+            ],
+            "Cache-Control": [
+              "public, max-age=14400"
+            ],
+            "Cf-Cache-Status": [
+              "HIT"
+            ],
+            "Cf-Ray": [
+              "8dbabbbddde2c3c9-WAW"
+            ],
+            "Connection": [
+              "keep-alive"
+            ],
+            "Content-Security-Policy": [
+              "connect-src 'self' checkout.stripe.com https://checkout.stripe.com https://billing.stripe.com/session https://api.funcaptcha.com https://api.arkoselabs.com sentry.io api.github.com www.npmjs.com;default-src 'none';img-src * data: https://*.stripe.com;script-src 'self' data: 'unsafe-inline' https://checkout.stripe.com/checkout.js https://checkout.stripe.com https://js.stripe.com/v3 https://platform.twitter.com/widgets.js https://octocaptcha.com https://static-production.npmjs.com/;style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://static-production.npmjs.com/;frame-src checkout.stripe.com https://checkout.stripe.com https://js.stripe.com/ https://octocaptcha.com;font-src https://fonts.gstatic.com https://static-production.npmjs.com/ ;media-src https://player.vimeo.com https://fpdl.vimeocdn.com https://gcs-vimeo.akamaized.net https://vod-progressive.akamaized.net"
+            ],
+            "Content-Type": [
+              "text/html"
+            ],
+            "Content-Encoding": [
+              "gzip"
+            ],
+            "Date": [
+              "Fri, 01 Nov 2024 09:07:14 GMT"
+            ],
+            "Hoverfly": [
+              "Was-Here"
+            ],
+            "Last-Modified": [
+              "Fri, 01 Nov 2024 08:06:23 GMT"
+            ],
+            "Npm-Cost": [
+              "1"
+            ],
+            "Npm-Remaining": [
+              "99"
+            ],
+            "Server": [
+              "cloudflare"
+            ],
+            "Set-Cookie": [
+              "__cf_bm=Pdp5pDXlDLJMEBkDrBhoSFICvcB.dqROcvyqUosKQF4-1730452034-1.0.1.1-wcvWl8fdvxmV_N7meebAOc07sO8TriPdbtNSfrtcBYB_KNQyw.8f24MCvo5_4m9Le14gYTaw7zuJy4G6G_3xMQ; path=/; expires=Fri, 01-Nov-24 09:37:14 GMT; domain=.npmjs.com; HttpOnly; Secure; SameSite=None"
+            ],
+            "Strict-Transport-Security": [
+              "max-age=2592000; includeSubDomains; preload"
+            ],
+            "Vary": [
+              "x-requested-with, x-spiferack, Accept-Encoding"
+            ],
+            "X-Content-Security-Policy": [
+              "connect-src 'self' checkout.stripe.com https://checkout.stripe.com https://billing.stripe.com/session https://api.funcaptcha.com https://api.arkoselabs.com sentry.io api.github.com www.npmjs.com;default-src 'none';img-src * data: https://*.stripe.com;script-src 'self' data: 'unsafe-inline' https://checkout.stripe.com/checkout.js https://checkout.stripe.com https://js.stripe.com/v3 https://platform.twitter.com/widgets.js https://octocaptcha.com https://static-production.npmjs.com/;style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://static-production.npmjs.com/;frame-src checkout.stripe.com https://checkout.stripe.com https://js.stripe.com/ https://octocaptcha.com;font-src https://fonts.gstatic.com https://static-production.npmjs.com/ ;media-src https://player.vimeo.com https://fpdl.vimeocdn.com https://gcs-vimeo.akamaized.net https://vod-progressive.akamaized.net"
+            ],
+            "X-Content-Type-Options": [
+              "nosniff"
+            ],
+            "X-Frame-Options": [
+              "DENY"
+            ],
+            "X-Xss-Protection": [
+              "1; mode=block"
+            ]
+          },
+          "templated": false
+        }
+      }
+    ],
+    "globalActions": {
+      "delays": [],
+      "delaysLogNormal": []
+    }
+  },
+  "meta": {
+    "schemaVersion": "v5.2",
+    "hoverflyVersion": "v1.9.0",
+    "timeExported": "2024-11-01T09:07:37Z"
+  }
+}
