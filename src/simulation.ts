@@ -67,6 +67,10 @@ function subtractPairs(
   return left.filter((p) => !rightSignatures.includes(requestSignature(p.request)));
 }
 
+// TODO: introduce different modes for handling of a duplicated request:
+// * overwite (the existing one)
+// * skip (todo)
+// * raise error (todo)
 export function mergeSimulations(left: Simulation, right: Simulation): Simulation {
   const leftPairsToKeep = subtractPairs(left.data.pairs, right.data.pairs);
   return buildSimulation(leftPairsToKeep.concat(right.data.pairs));
