@@ -9,6 +9,17 @@ describe('Client', () => {
     await resetState()
   })
 
+  test('destination', async () => {
+    await client.unsetDestination()
+    expect((await client.getDestination()).destination).toBe(".")
+
+    await client.setDestination({destination: "github|openai"})
+    expect((await client.getDestination()).destination).toBe("github|openai")
+
+    await client.unsetDestination()
+    expect((await client.getDestination()).destination).toBe(".")
+  })
+
   test('getSimulation', async () => {
     const sim = await client.getSimulation()
     expect(sim.meta.hoverflyVersion).toBeDefined()

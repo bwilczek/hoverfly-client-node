@@ -213,6 +213,8 @@ This library, at this stage, supports the following subset, represented as metho
 
 * `GET /api/v2/hoverfly/mode` : `getMode(): Promise<ModePayload>`
 * `PUT /api/v2/hoverfly/mode` : `setMode(payload: SetModePayload): Promise<ModePayload>`
+* `GET /api/v2/hoverfly/destination` : `getDestination(): Promise<DestinationPayload>`
+* `PUT /api/v2/hoverfly/destination` : `setDestination(payload: DestinationPayload): Promise<DestinationPayload>`
 * `GET /api/v2/hoverfly/middleware` : `getMiddleware(): Promise<MiddlewarePayload>`
 * `PUT /api/v2/hoverfly/middleware` : `setMiddleware(payload: MiddlewarePayload): Promise<MiddlewarePayload>`
 * `purgeMiddleware(): Promise<MiddlewarePayload>` - sets current middleware to an empty object

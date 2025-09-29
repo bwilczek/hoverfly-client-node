@@ -5,6 +5,7 @@ import { mergeSimulations, subtractSimulations, Simulation, buildSimulation } fr
 import { RequestMatcher } from "./simulation/request";
 import { ResponseData } from "./simulation/response";
 import { Journal, JournalSearchPayload } from "./journal";
+import { DestinationPayload } from "./destination";
 
 export class Client {
   http: axios.AxiosInstance;
@@ -38,6 +39,25 @@ export class Client {
       throw new Error(`Hoverfly mode rejected. Payload: ${JSON.stringify(payload)} Response: ${response.data.error}`);
     }
     return response.data as Promise<ModePayload>;
+  }
+
+  async getDestination(): Promise<DestinationPayload> {
+    const response = await this.http.get("/api/v2/hoverfly/destination");
+    return response.data as Promise<DestinationPayload>;
+  }
+
+  async setDestination(payload: DestinationPayload): Promise<DestinationPayload> {
+    const response = await this.http.put("/api/v2/hoverfly/destination", payload);
+    if (response.status !== 200) {
+      throw new Error(
+        `Hoverfly destination rejected. Payload: ${JSON.stringify(payload)} Response: ${response.data.error}`,
+      );
+    }
+    return response.data as Promise<DestinationPayload>;
+  }
+
+  async unsetDestination(): Promise<DestinationPayload> {
+    return this.setDestination({ destination: "." });
   }
 
   async purgeMiddleware(): Promise<MiddlewarePayload> {
@@ -87,7 +107,8 @@ export class Client {
     return buildSimulation(response.data.data.pairs as Array<{ request: RequestMatcher; response: ResponseData }>);
   }
 
-  async uploadSimulation(payload: Simulation): Promise<Simulation> {
+  // PUT overwrites the existing pairs
+  async putSimulation(payload: Simulation): Promise<Simulation> {
     const response = await this.http.put("/api/v2/simulation", payload);
     if (response.status !== 200) {
       throw new Error(
@@ -95,6 +116,21 @@ export class Client {
       );
     }
     return response.data as Promise<Simulation>;
+  }
+
+  // POST merges the incoming pairs with the existing pairs. Does not overwrite!
+  async postSimulation(payload: Simulation): Promise<Simulation> {
+    const response = await this.http.post("/api/v2/simulation", payload);
+    if (response.status !== 200) {
+      throw new Error(
+        `Hoverfly simulation rejected. Payload: ${JSON.stringify(payload)} Response: ${response.data.error}`,
+      );
+    }
+    return response.data as Promise<Simulation>;
+  }
+
+  async uploadSimulation(payload: Simulation): Promise<Simulation> {
+    return this.putSimulation(payload);
   }
 
   async purgeSimulation(): Promise<Simulation> {
