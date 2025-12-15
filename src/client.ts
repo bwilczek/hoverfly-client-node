@@ -13,7 +13,7 @@ export class Client {
   constructor(baseUrl: string = "http://127.0.0.1:8888/") {
     this.http = axios.create({
       baseURL: baseUrl,
-      timeout: 1000,
+      timeout: 5000,
       headers: { "Content-Type": "application/json" },
       validateStatus: () => true,
     });
